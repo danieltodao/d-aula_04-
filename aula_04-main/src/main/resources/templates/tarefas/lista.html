@@ -19,6 +19,27 @@
             <p>Nenhuma tarefa cadastrada.</p>
         </div>
 
+        <h1>Lista de Tarefas</h1>
+
+        <div style="margin-bottom: 15px;">
+            <strong>Filtrar:</strong>
+
+            <a th:href="@{/tarefas}"
+               th:classappend="${filtroAtual == 'todas'} ? 'fw-bold text-primary' : ''">
+                Todas
+            </a> |
+
+            <a th:href="@{/tarefas(filtro='pendentes')}"
+               th:classappend="${filtroAtual == 'pendentes'} ? 'fw-bold text-primary' : ''">
+                Pendentes
+            </a> |
+
+            <a th:href="@{/tarefas(filtro='concluidas')}"
+               th:classappend="${filtroAtual == 'concluidas'} ? 'fw-bold text-primary' : ''">
+                Concluídas
+            </a>
+        </div>
+
         <table th:if="${!#lists.isEmpty(tarefas)}" class="table">
             <thead>
                 <tr>
