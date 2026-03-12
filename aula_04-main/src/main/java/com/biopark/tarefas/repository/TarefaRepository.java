@@ -46,4 +46,29 @@ public class TarefaRepository {
     public void deleteById(Long id) {
         tarefas.remove(id);
     }
+
+    public List<Tarefa> findPendentes() {
+        List<Tarefa> pendentes = new ArrayList<>();
+
+        for (Tarefa tarefa : tarefas.values()) {
+            if (!tarefa.getConcluida()) {
+                pendentes.add(tarefa);
+            }
+        }
+
+        return pendentes;
+    }
+
+    public List<Tarefa> findConcluidas() {
+        List<Tarefa> concluidas = new ArrayList<>();
+
+        for (Tarefa tarefa : tarefas.values()) {
+            if (!tarefa.getConcluida()) {
+                concluidas.add(tarefa);
+            }
+        }
+
+        return concluidas;
+    }
 }
+

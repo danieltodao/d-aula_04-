@@ -38,4 +38,13 @@ public class TarefaService {
             tarefaRepository.save(tarefa);
         });
     }
+
+    public List<Tarefa> listarPendentes() {
+        return tarefaRepository.findPendentes();
+    }
+
+    public List<Tarefa> listarConcluidas() {
+        return tarefaRepository.findConcluidas();
+
+    }
 }

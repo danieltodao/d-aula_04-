@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/tarefas")
@@ -23,8 +25,28 @@ public class TarefaController {
     }
 
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("tarefas", tarefaService.listarTodas());
+    public String listar(@RequestParam(required = false) String filtro, Model model) {
+
+        List<Tarefa> tarefas;
+
+        if ("pendentes".equals(filtro)) {
+            tarefas = tarefaService.listarPendentes();
+        }
+        else if ("concluidas".equals(filtro)) {
+            tarefas = tarefaService.listarConcluidas();
+        }
+        else {
+            tarefas = tarefaService.listarTodas();
+            filtro = "todas";
+        }
+
+        model.addAttribute("tarefas", tarefas);
+        model.addAttribute("filtroAtual", filtro);
+
+        model.addAttribute("total", tarefaService.listarTodas().size());
+        model.addAttribute("pendentes", tarefaService.listarPendentes().size());
+        model.addAttribute("concluidas", tarefaService.listarConcluidas().size());
+
         return "tarefas/lista";
     }
 
