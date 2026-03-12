@@ -46,7 +46,6 @@ public class TarefaController {
         model.addAttribute("total", tarefaService.listarTodas().size());
         model.addAttribute("pendentes", tarefaService.listarPendentes().size());
         model.addAttribute("concluidas", tarefaService.listarConcluidas().size());
-
         return "tarefas/lista";
     }
 

@@ -39,7 +39,11 @@
                 Concluídas
             </a>
         </div>
-
+        <p>
+            Você tem <b th:text="${total}"></b> tarefas
+            (<span th:text="${pendentes}"></span> pendentes,
+            <span th:text="${concluidas}"></span> concluídas)
+        </p>
         <table th:if="${!#lists.isEmpty(tarefas)}" class="table">
             <thead>
                 <tr>
